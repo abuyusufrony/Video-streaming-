@@ -6,8 +6,19 @@ const Loadcatagories = () => {
 
 }
 
-Loadcatagories()
+
 
 const usercatagorey = (data) => {
-    console.log(data)
+    const navCatagory = document.getElementById('catagories');
+    data.forEach((items) => {
+        console.log(items)
+        const button = document.createElement('button');
+        button.classList = 'btn'
+        button.innerText = items.category;
+        navCatagory.appendChild(button)
+
+
+    });
 }
+
+Loadcatagories()
