@@ -5,20 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.23/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
     <Header>
 
     </Header>
-    <nav>
-        <ul>
-            <li>ROny</li>
-            <li>Bony</li>
-            <li>Gony</li>
-            <li></li>
-            <li></li>
-        </ul>
+    <nav class=" flex justify-between w-11/12 mx-auto mt-4 ">
+
+        <div class="logo">
+            <img src="image/Logo.png" alt="">
+        </div>
+        <div class="input"><input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+        </div>
+        <div class="btn"><Button>
+                Sort
+            </Button></div>
+
     </nav>
 </body>
 
