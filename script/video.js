@@ -15,7 +15,7 @@ const videoLoad = () => {
 
 const LoadvideoByuser = (allVideo) => {
     const videoConatiner = document.getElementById('video-container')
-
+    videoConatiner.innerHTML = "";
     allVideo.forEach((Video) => {
         console.log(Video)
         const card = document.createElement('div')
@@ -27,7 +27,7 @@ const LoadvideoByuser = (allVideo) => {
       class="w-full h-full object-cover"
 
       alt="Shoes" />
-      ${Video.others.posted_date?.length == 0 ? "" : `<span class=" absolute  right-2 bottom-2  rounded p-1   bg-black text-white"> ${gettime(Video.others.posted_date)} </span>`}
+      ${Video.others.posted_date?.length == 0 ? "" : `<span class=" text-xs absolute  right-2 bottom-2  rounded p-1   bg-black text-white"> ${gettime(Video.others.posted_date)} </span>`}
       
   </figure>
   <div class="px-0 py-2 flex">
@@ -51,10 +51,10 @@ const usercatagorey = (data) => {
     const navCatagory = document.getElementById('catagories');
     data.forEach((items) => {
         console.log(items)
-        const button = document.createElement('button');
-        button.classList = 'btn'
-        button.innerText = items.category;
-        navCatagory.appendChild(button)
+        const buttonContainer = document.createElement('div');
+        buttonContainer.innerHTML = `<button onclick="loadvideosCatagory(${items.category_id})" class=" btn ">${items.category}  </button>`
+
+        navCatagory.appendChild(buttonContainer)
 
 
     });
@@ -65,11 +65,20 @@ function gettime(time) {
     let remaingsec = parseInt(time) % 3600;
     const min = parseInt(remaingsec / 60);
     remaingsec = remaingsec % 60;
-    return ` ${hour} hour ago and ${min} minate ago ${remaingsec} sec `;
+    return ` ${hour} hour  and ${min} minate  ${remaingsec} sec `;
 
 }
+const loadvideosCatagory = (id) => {
+    // alert(id)
+    fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${id}`)
+        .then((res) => res.json())
+        .then((data) => LoadvideoByuser(data.category))
+}
+
+const catavideosImort = () => {
 
 
+}
 Loadcatagories()
 videoLoad()
 
