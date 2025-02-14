@@ -16,6 +16,17 @@ const videoLoad = () => {
 const LoadvideoByuser = (allVideo) => {
     const videoConatiner = document.getElementById('video-container')
     videoConatiner.innerHTML = "";
+    if (allVideo == 0) {
+        videoConatiner.classList.remove('grid')
+        videoConatiner.innerHTML = `<div class=" min-h-[300px] gap-5 flex  flex-col  justify-center items-center  "> <img src=" image/icon.png"/></div>
+        <h2 class=" text-center font-sans font-bold text-xl"> No Content here! </h2>`
+        return
+
+    }
+    else {
+        videoConatiner.classList.add('grid')
+
+    }
     allVideo.forEach((Video) => {
         console.log(Video)
         const card = document.createElement('div')
