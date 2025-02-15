@@ -13,6 +13,8 @@ const videoLoad = () => {
         .then((error) => console.log(error))
 }
 
+
+
 const LoadvideoByuser = (allVideo) => {
     const videoConatiner = document.getElementById('video-container')
     videoConatiner.innerHTML = "";
@@ -63,7 +65,7 @@ const usercatagorey = (data) => {
     data.forEach((items) => {
         console.log(items)
         const buttonContainer = document.createElement('div');
-        buttonContainer.innerHTML = `<button onclick="loadvideosCatagory(${items.category_id})" class=" btn ">${items.category}  </button>`
+        buttonContainer.innerHTML = `<button id="btn-${items.category_id}"  onclick="loadvideosCatagory(${items.category_id})" class=" btn catageroy-button ">${items.category}  </button>`
 
         navCatagory.appendChild(buttonContainer)
 
@@ -79,11 +81,27 @@ function gettime(time) {
     return ` ${hour} hour  and ${min} minate  ${remaingsec} sec `;
 
 }
+const removeColur = () => {
+    const addColur = document.getElementsByClassName('catageroy-button');
+    console.log(addColur)
+    for (let clrbtn of addColur) {
+        clrbtn.classList.remove('active')
+    }
+
+}
+
+
+
+
 const loadvideosCatagory = (id) => {
     // alert(id)
     fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${id}`)
         .then((res) => res.json())
-        .then((data) => LoadvideoByuser(data.category))
+        .then((data) => {
+            removeColur()
+            const activeBtn = document.getElementById(`btn-${id}`)
+            activeBtn.classList.add('active')
+        })
 }
 
 const catavideosImort = () => {
