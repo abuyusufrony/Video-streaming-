@@ -30,7 +30,7 @@ const LoadvideoByuser = (allVideo) => {
 
     }
     allVideo.forEach((Video) => {
-        console.log(Video)
+        // console.log(Video)
         const card = document.createElement('div')
         card.classList = '<div class="card card-compact   ">'
         card.innerHTML = `
@@ -53,6 +53,7 @@ const LoadvideoByuser = (allVideo) => {
           <p> ${Video.authors[0].profile_name} </p> 
           ${Video.authors[0].verified === true ? `<img class="w-5 h-5"  src="https://img.icons8.com/?size=96&id=D9RtvkuOe31p&format=png"/> ` : ""}
         </div>
+        <P><button onclick ="loadVideoId('${Video.video_id}')" class="btn btn-sm btn-error">Details</button>   </p>
 
  `
 
@@ -65,7 +66,8 @@ const usercatagorey = (data) => {
     data.forEach((items) => {
         console.log(items)
         const buttonContainer = document.createElement('div');
-        buttonContainer.innerHTML = `<button id="btn-${items.category_id}"  onclick="loadvideosCatagory(${items.category_id})" class=" btn catageroy-button ">${items.category}  </button>`
+        buttonContainer.innerHTML = `<button onclick="
+        " id="btn-${items.category_id}"  onclick="loadvideosCatagory(${items.category_id})" class=" btn catageroy-button ">${items.category}  </button>`
 
         navCatagory.appendChild(buttonContainer)
 
@@ -89,7 +91,21 @@ const removeColur = () => {
     }
 
 }
+const loadVideoId = async (videoid) => {
+    console.log(videoid)
+    const uri = `https://openapi.programming-hero.com/api/phero-tube/video/${videoid}`
+    const res = await fetch(uri)
+    const data = await res.json()
+    displayDetails(data.video)
+}
+const displayDetails = (video) => {
+    console.log(video)
+    const detailsContr = document.getElementById('modal-content')
+    detailsContr.innerHTML = `<img src =${video.thumbnail} />
+    <p>${video.description}  <p>`
+    document.getElementById('showmodal').click()
 
+}
 
 
 
