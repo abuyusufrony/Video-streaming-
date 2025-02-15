@@ -1,5 +1,5 @@
-const Loadcatagories = () => {
-    fetch('https://openapi.programming-hero.com/api/phero-tube/categories')
+const Loadcatagories = (searchText = "") => {
+    fetch(`https://openapi.programming-hero.com/api/phero-tube/categories=${searchText}`)
         .then((res) => res.json())
         .then((data) => usercatagorey(data.categories))
         .then((err) => console.log(err))
@@ -124,6 +124,10 @@ const catavideosImort = () => {
 
 
 }
+
+document.getElementById('catagorey-search').addEventListener('keyup', (e) => {
+    Loadcatagories(e.target.value)
+})
 Loadcatagories()
 videoLoad()
 
